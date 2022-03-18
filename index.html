@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sugar Rush</title>
+  <link rel="stylesheet" href="main.css">
+</head>
+<body>
+  <div id="loading" class="page hide">
+    <span id="loading-message"></span>
+  </div>
+
+  <div id="tip-before-game" class="page">
+    <p id="tip-context">
+      This game contains flash content that may be harmful to your health. If you feel unwell during the game, please quit the game immediately. Thank you for your understanding. 
+    </p>
+    <div id="tip-confirm">わかりました！</div>
+  </div>
+
+  <div id="home" class="page hide">
+    <div id="home-menu">
+      <span id="home-select">Start</span>
+      <span id="home-settings">Settings</span>
+    </div>
+  </div>
+
+  <div id="settings" class="page hide">
+    <div onclick="jump('home');">Languege</div>
+    <div id="settings-langs"></div>
+  </div>
+
+  <div id="select" class="page hide">
+    select page <div onclick="jump('home')">23333</div>
+  </div>
+
+  <div id="click-circles-container"></div>
+  <script src="game.js"></script>
+  <script>
+// languege init
+!function(){
+  const supportingLangs = ['en', 'zh_hans', 'jp'];
+  for(const lang of supportingLangs) {
+    const span = document.createElement('span');
+    span.textContent = lang;
+    span.onclick = ()=> selectLang(lang)
+    document.getElementById('settings-langs').append(span);
+  };
+
+  if(window.localStorage.getItem('lang')) {
+    const lang = window.localStorage.getItem('lang');
+    selectLang(lang);
+  }else jump('tip-before-game');
+
+  function selectLang(lang) {
+    localStorage.setItem('lang', lang);
+    document.documentElement.lang = lang;
+
+    const aload = new Load();
+    get(`asset/langs/${lang}.json`, (res, status)=>{
+      if(status===200) {
+        aload.end(true);
+
+        res = JSON.parse(res)
+        for(const langFragment in res) {
+          if(document.getElementById(langFragment)) {
+            document.getElementById(langFragment).textContent = res[langFragment];
+          };
+        };
+      }else {
+        aload.end(false, 'lang pack not found');
+      };
+    });
+  };
+}();
+  </script>
+</body>
+</html>

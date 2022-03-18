@@ -1,0 +1,22 @@
+{
+  "name": "Sugar Rush's Original Soundtrack",
+  "description": "Original music pack of Sugar Rush",
+  "packs": {
+    "length": 10,
+    "name": "Base",
+    "music": [
+      {
+        "name": "test",
+        "file": "index.mp3",
+        "cover": "folder.jpg",
+        "artist": "Cloria Sound Labs"
+      },
+      {
+        "name": "test2",
+        "file": "index.flac",
+        "cover": "folder.jpg",
+        "artist": "DECO*27/初音ミク"
+      }
+    ]
+  }
+}
