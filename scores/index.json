@@ -1,22 +1,71 @@
 {
-  "name": "Sugar Rush's Original Soundtrack",
+  "title": "Sugar Rush's Original Soundtrack",
   "description": "Original music pack of Sugar Rush",
-  "packs": {
-    "length": 10,
-    "name": "Base",
-    "music": [
-      {
-        "name": "test",
-        "file": "index.mp3",
-        "cover": "folder.jpg",
-        "artist": "Cloria Sound Labs"
-      },
-      {
-        "name": "test2",
-        "file": "index.flac",
-        "cover": "folder.jpg",
-        "artist": "DECO*27/初音ミク"
-      }
-    ]
-  }
+  "packs": [
+    {
+      "name": "base",
+      "title": "Base Pack",
+      "music": [
+        {
+          "name": "test",
+          "title": "iiiiii",
+          "file": "index.mp3",
+          "cover": "folder.jpg",
+          "artist": "Cloria Sound Labs",
+          "scores": {
+            "o": "w",
+            "i": "w",
+            "f": "w"
+          }
+        },
+        {
+          "name": "test2",
+          "title": "2222",
+          "file": "index.flac",
+          "cover": "folder.jpg",
+          "artist": "DECO*27/初音ミク",
+          "scores": {
+            "q": "w",
+            "k": "w"
+          }
+        }
+      ]
+    },
+    {
+      "name": "iron",
+      "title": "Iron",
+      "music": [
+        {
+          "name": "ir",
+          "title": "InteR",
+          "file": "index.mp3",
+          "artist": "Xu Mengyuan",
+          "scores": {
+            "o": "w",
+            "f": "w"
+          }
+        },
+        {
+          "name": "on",
+          "title": "oNet",
+          "file": "index.mp3",
+          "cover": "folder.png",
+          "artist": "Hoyo Mix",
+          "scores": {
+            "k": "w"
+          }
+        },
+        {
+          "name": "on",
+          "title": "oNet",
+          "file": "index.mp3",
+          "cover": "folder.png",
+          "artist": "Hoyo Mix",
+          "scores": {
+            "q": "w"
+          }
+        }
+      ]
+    }
+  ]
 }

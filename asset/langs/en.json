@@ -2,6 +2,9 @@
   "tip-context": "This game contains flash content that may be harmful to your health. If you feel unwell during the game, please quit the game immediately. Thank you for your understanding. ",
   "tip-confirm": "All Right!",
   "home-select": "Start",
-  "home-settings": "Settings"
+  "home-settings": "Settings",
+  "translate-language": "Language",
+  "translate-change-lang": "Change language",
+  "translate-offset": "Beat Offset"
 
 }

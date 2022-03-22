@@ -8,11 +8,13 @@
   <link rel="stylesheet" href="main.css">
 </head>
 <body>
+  <h1 style="display: none;">Sugar Rush</h1>
+
   <div id="loading" class="page hide">
     <span id="loading-message"></span>
   </div>
 
-  <div id="tip-before-game" class="page">
+  <div id="tip-before-game" class="page hide">
     <p id="tip-context">
       This game contains flash content that may be harmful to your health. If you feel unwell during the game, please quit the game immediately. Thank you for your understanding. 
     </p>
@@ -27,35 +29,67 @@
   </div>
 
   <div id="settings" class="page hide">
-    <div onclick="jump('home');">Languege</div>
-    <div id="settings-langs"></div>
+    <div id="settings-return"><svg height="1024" viewBox="0 0 1024 1024" width="1024"><path d="M702.912 1024 192.128 510.784 700.416 0 768.32 68.224 327.936 510.784 770.816 955.776Z"></path></svg></div>
+    <div id="settings-nav"></div>
+    <div id="settings-content">
+      <div>
+        <h2 id="translate-language">Language</h2>
+        <div id="settings-langs" class="disabled"></div>
+        <span id="translate-change-lang" class="setting-button">Change Language</span>
+      </div>
+      <div>
+        <h2 id="translate-offset">Beat Offset</h2>
+      </div>
+    </div>
   </div>
 
-  <div id="select" class="page hide">
-    select page <div onclick="jump('home')">23333</div>
+  <div id="select" class="page">
+    <div id="select-header">
+      <div id="select-return"><svg height="1024" viewBox="0 0 1024 1024" width="1024"><path d="M702.912 1024 192.128 510.784 700.416 0 768.32 68.224 327.936 510.784 770.816 955.776Z"></path></svg></div>
+      <div id="select-difficulty"></div>
+      <div id="select-pack">
+        <div id="select-selected-index">
+          <span id="select-selected-number">1</span>
+          <span id="select-total-number">233</span>
+          <span id="select-pack-name"></span>
+        </div>
+        <div id="select-pack-list"></div>
+      </div>
+    </div>
+    <div id="select-list"></div>
+    <div id="select-go"></div>
   </div>
 
   <div id="click-circles-container"></div>
   <script src="game.js"></script>
   <script>
-// languege init
+// language and lang related scripts here
 !function(){
-  const supportingLangs = ['en', 'zh_hans', 'jp'];
-  for(const lang of supportingLangs) {
+  const supportingLangs = {
+    "en": "English",
+    "zh-hans": "简体中文",
+    "jp": "日本語"
+  };
+  for(const lang in supportingLangs) {
     const span = document.createElement('span');
-    span.textContent = lang;
-    span.onclick = ()=> selectLang(lang)
+    span.textContent = supportingLangs[lang];
+    span.onclick = ()=> selectLang(lang);
+    span.id = 'settings-langs-option-' + lang;
     document.getElementById('settings-langs').append(span);
   };
 
   if(window.localStorage.getItem('lang')) {
     const lang = window.localStorage.getItem('lang');
     selectLang(lang);
-  }else jump('tip-before-game');
+  }else selectLang('en');
 
   function selectLang(lang) {
     localStorage.setItem('lang', lang);
     document.documentElement.lang = lang;
+    for(const span of document.getElementById('settings-langs').children) {
+      span.classList.remove('selected');
+    };
+    document.getElementById('settings-langs-option-' + lang).classList.add('selected');
 
     const aload = new Load();
     get(`asset/langs/${lang}.json`, (res, status)=>{
@@ -70,6 +104,16 @@
         };
       }else {
         aload.end(false, 'lang pack not found');
+      };
+
+      // reset navbar in settings with target language
+      const settingNavbar = document.getElementById('settings-nav');
+      settingNavbar.textContent = '';
+      for(const h2 of document.getElementById('settings-content').getElementsByTagName('h2')) {
+        const a = document.createElement('a');
+        a.href = '#'+h2.id;
+        a.textContent = h2.textContent;
+        document.getElementById('settings-nav').append(a);
       };
     });
   };
